@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -39,14 +40,24 @@ public class FilesExample {
         }
         // C:/tmp C:\\tmp
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            reader.lines().forEach(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            writer.write("Hello3");
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
