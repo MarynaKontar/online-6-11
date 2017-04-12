@@ -23,7 +23,6 @@ public class ReaderWriterExample {
         Reader reader = null;
         Writer writer = null;
         // Lets take examples for string reader.
-
         // It was exact same API as in input stream but for characters.
         try {
             reader = new StringReader("test string");
@@ -36,6 +35,10 @@ public class ReaderWriterExample {
             // And streams can be nested.
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             // and in can read by lines.
+//            String line;
+//            while ((line = bufferedReader.readLine()) != null) {
+//
+//            }
             System.out.println(bufferedReader.readLine());
             // In java 8 more cool features came.
             bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -61,6 +64,7 @@ public class ReaderWriterExample {
         // Lets write string to console.
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
         bufferedWriter.write("Something is happening today!");
-        bufferedWriter.close();
+        //bufferedWriter.
+
     }
 }

@@ -42,13 +42,14 @@ public class BasicExamplesIO {
         outputStream.flush();
         // closes the stream.
         //
-        // outputStream.close();
+        //outputStream.close();
         //
         // Read has some overloading methods. One which uses array of bytes - load stream of bytes into array and return
         // number of bytes read.
         byte[] buffer = new byte[100];
         int read;
         while ((read = inputStream.read(buffer)) > 0) {
+            System.out.println("Read bytes : " + read);
             outputStream.write(Arrays.copyOfRange(buffer, 0, read));
             outputStream.flush();
         }
