@@ -55,6 +55,9 @@ public class TryWithResExamples {
             evilClosable.run();
         } catch (Exception e) {
             e.printStackTrace();
+            // Есть во время закрытие произошло исключение - оно обработается этим обработчиком.
+            // Если при вызове метода произошло исключение и потом при закритии тоже - то второе будет подавлено.
+            // Его можно получить вызвав метод getSuppressed
             System.out.println(Arrays.toString(e.getSuppressed()));
         }
 
@@ -65,17 +68,18 @@ public class TryWithResExamples {
 //            }
 //        }
 
+        // Можео создавать несколько переменный в блоке try. Для каждой будет вызван close
         try (EvilClosable evilClosable1 = new EvilClosable();
              EvilClosable evilClosable2 = new EvilClosable();) {
             System.out.println("Done");
             evilClosable1.run();
         } catch (Exception e) {
+            // Обратите снимания что поскольку каждый раз при закрытии мы получаем исключение
+            // то getSuppressed вернет масив с двух исключений вместе одного.
+            //[java.lang.RuntimeException: Ha-ha-ha!, java.lang.RuntimeException: Ha-ha-ha!]
             e.printStackTrace();
             System.out.println(Arrays.toString(e.getSuppressed()));
         }
-
-
-
     }
 
     private static class EvilClosable implements Closeable {
